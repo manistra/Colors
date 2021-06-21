@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .main-container {
+    @apply w-11/12 h-screen mx-auto md:w-10/12 lg:w-8/12 xl:w-7/12;
+  }
+
+  .text-title {
+    @apply text-5xl italic font-bold tracking-widest uppercase lg:text-8xl md:text-8xl sm:text-6xl;
+  }
+
+  .text-hex {
+    @apply text-3xl tracking-wide uppercase lg:text-6xl md:text-4xl sm:text-3xl;
+  }
+  .btn {
+    @apply text-xl font-bold bg-white border-2 border-gray-900 rounded shadow-md h-14 lg:h-20 lg:text-3xl;
+  }
+  .input {
+    @apply h-10 p-2 text-base font-semibold uppercase border-2 border-gray-900 rounded shadow-md lg:text-xl lg:h-12;
+  }
+  .top-container {
+    @apply flex flex-col items-center justify-between h-1/2;
+  }
+  .bottom-container {
+    @apply flex items-center justify-center h-1/2;
+  }
+  .list-container {
+    @apply max-h-full overflow-y-scroll uppercase bg-white border-2 border-gray-900 rounded-md shadow-xl;
+  }
+  .list-item {
+    @apply flex items-center bg-blue-300 rounded cursor-pointer;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,9 +41,4 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }

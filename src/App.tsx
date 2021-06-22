@@ -1,10 +1,6 @@
 import useColorService from './services/colorService';
 import { useEffect } from 'react';
-import { ColorsListContainer } from './dndExample/DndColorContainer';
-import { isMobile } from 'react-device-detect';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { TouchBackend } from 'react-dnd-touch-backend';
+import { ColorsListContainer } from './components/ColorList';
 
 function App() {
   const [getColor, color, errorMsg] = useColorService();
@@ -49,18 +45,7 @@ function App() {
           </div>
           <div className='bottom-container'>
             <div className='w-full h-5/6 '>
-              <DndProvider
-                backend={isMobile ? TouchBackend : HTML5Backend}
-                options={
-                  isMobile
-                    ? {
-                        delayTouchStart: 100,
-                      }
-                    : {}
-                }
-              >
-                <ColorsListContainer />
-              </DndProvider>
+              <ColorsListContainer />
             </div>
           </div>
         </div>

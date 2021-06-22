@@ -25,7 +25,7 @@ export const ColorList = ({
     )
       return;
 
-    const newColorList = [...colors]; //const or let? BUMP
+    const newColorList = [...colors];
     newColorList.splice(source.index, 1);
     newColorList.splice(destination.index, 0, colors[source.index]);
     changeColorHistory(newColorList);

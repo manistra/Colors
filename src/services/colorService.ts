@@ -11,7 +11,7 @@ const api = axios.create({
 
 const useColorService = (): [() => void, (newColor: Color) => void, (newColorHistory: Color[]) => void, Color, string, Color[],] =>
 {
-    const [currentColor, setCurrentColor] = useState<Color>({ hex: "#FFFFFF", id: -2 }); //Remove this and add active prop to colorHistory? BUMP
+    const [currentColor, setCurrentColor] = useState<Color>({ hex: "#FFFFFF", id: -2 });
     const [colorHistory, setColorHistory] = useState<Color[]>([]);
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -20,7 +20,7 @@ const useColorService = (): [() => void, (newColor: Color) => void, (newColorHis
         setErrorMsg("");
         try
         {
-            const response = await api.get<ColrResponse>(API_URL, { params: { t: new Date().getTime() } });
+            const response = await api.get<ColrResponse>(API_URL, { params: { t: new Date().getTime() } }); //
             if (response.data.colors[0].id === -1)
             {
                 setErrorMsg("Something went wrong please try again.");
@@ -42,7 +42,7 @@ const useColorService = (): [() => void, (newColor: Color) => void, (newColorHis
         if (newColor)
         {
             let newColorHistory = colorHistory.filter(color => color.hex !== hex); //is this a ref or a copy of colorHistory? BUMP
-            setColorHistory((colorHistory) => [...newColorHistory])
+            setColorHistory([...newColorHistory])
         }
     }
     const changeCurrentColor = (newColor: Color) =>
@@ -54,7 +54,7 @@ const useColorService = (): [() => void, (newColor: Color) => void, (newColorHis
     }
     const changeColorHistory = (newColorHistory: Color[]) =>
     {
-        setColorHistory(colorHistory => [...newColorHistory]);
+        setColorHistory([...newColorHistory]);
 
     }
 

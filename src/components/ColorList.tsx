@@ -1,77 +1,22 @@
-import { useState } from 'react';
-import { DndColorCard } from './Color';
+import { ColorItem } from './ColorItem';
+import { Color } from '../types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-export const ColorsListContainer = () => {
-  const [cards, setCards] = useState([
-    {
-      id: 1,
-      hex: 'Write a cool JS library',
-    },
-    {
-      id: 2,
-      hex: 'Make it generic enough',
-    },
-    {
-      id: 3,
-      hex: 'Write README',
-    },
-    {
-      id: 4,
-      hex: 'Create some examples',
-    },
-    {
-      id: 5,
-      hex: 'Spam in Twitter and IRC to hers)',
-    },
-    {
-      id: 6,
-      hex: '???',
-    },
-    {
-      id: 7,
-      hex: 'PROa2dsFIT',
-    },
-    {
-      id: 8,
-      hex: 'PRasdOFIT',
-    },
-    {
-      id: 9,
-      hex: 'PROFsadIT',
-    },
-    {
-      id: 10,
-      hex: 'PasdadROFIT',
-    },
-    {
-      id: 11,
-      hex: 'PRsadOFIasdT',
-    },
-    {
-      id: 12,
-      hex: 'ddss',
-    },
-    {
-      id: 13,
-      hex: 'PRdadddsOFIT',
-    },
-    {
-      id: 14,
-      hex: 'PRdsdddaOFIT',
-    },
-    {
-      id: 15,
-      hex: 'PROFIsssT',
-    },
-    {
-      id: 16,
-      hex: 'PROdddFIT',
-    },
-  ]);
+interface ColorListProps {
+  changeCurrentColor: (newColor: Color) => void;
+  changeColorHistory: (newColorHistory: Color[]) => void;
+  colors: Color[];
+  currentColor: Color;
+}
 
+export const ColorList = ({
+  changeCurrentColor,
+  changeColorHistory,
+  colors,
+  currentColor,
+}: ColorListProps) => {
   const onDragEnd = (result: any) => {
-    const { destination, source, draggableId } = result;
+    const { destination, source } = result;
     if (!destination) return;
 
     if (
@@ -80,15 +25,21 @@ export const ColorsListContainer = () => {
     )
       return;
 
-    const newColorList = [...cards];
+    const newColorList = [...colors]; //const or let? BUMP
     newColorList.splice(source.index, 1);
-    newColorList.splice(destination.index, 0, cards[source.index]);
-    setCards(newColorList);
+    newColorList.splice(destination.index, 0, colors[source.index]);
+    changeColorHistory(newColorList);
   };
 
-  const renderCard = (card: { id: number; hex: string }, index: number) => {
+  const renderCard = (color: Color, index: number, selected: boolean) => {
     return (
-      <DndColorCard key={card.hex} index={index} id={card.id} hex={card.hex} />
+      <ColorItem
+        key={color.hex}
+        index={index}
+        hex={color.hex}
+        onClick={() => changeCurrentColor(color)}
+        selected={selected}
+      />
     );
   };
 
@@ -101,7 +52,9 @@ export const ColorsListContainer = () => {
             ref={provided.innerRef}
             className='color-list-container'
           >
-            {cards.map((card, i) => renderCard(card, i))}
+            {colors.map((color, i) =>
+              renderCard(color, i, color.hex === currentColor.hex)
+            )}
             {provided.placeholder}
           </div>
         )}

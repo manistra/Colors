@@ -1,5 +1,10 @@
 import useColorService from './services/colorService';
 import { useEffect } from 'react';
+import { ColorsListContainer } from './dndExample/DndColorContainer';
+import { isMobile } from 'react-device-detect';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 
 function App() {
   const [getColor, color, errorMsg] = useColorService();
@@ -11,53 +16,52 @@ function App() {
   }, []);
 
   return (
-    <div
-      className='antialiased transition-colors duration-500 App'
-      style={{
-        backgroundColor: color.hex,
-      }}
-    >
-      <div className='main-container'>
-        <div className='top-container'>
-          <h1 className='my-2 lg:my-6 text-title'>Colors</h1>
+    <div className='App'>
+      <div
+        className='antialiased transition-colors duration-500 '
+        style={{
+          backgroundColor: color.hex,
+        }}
+      >
+        <div className='main-container'>
+          <div className='top-container'>
+            <h1 className='my-2 lg:my-6 text-title'>Colors</h1>
 
-          <p className='p-1 px-4 my-4 border-b-2 border-gray-900 text-hex'>
-            {color.hex}
-          </p>
+            <p className='p-1 px-4 my-4 border-b-2 border-gray-900 text-hex'>
+              {color.hex}
+            </p>
 
-          <button
-            onClick={() => getColor()}
-            className='w-9/12 px-4 my-1 btn lg:w-1/2'
-            style={{
-              color: color.hex,
-            }}
-          >
-            Generate Color
-          </button>
-          <p className='text-lg font-semibold text-red-700'>{errorMsg}</p>
-          <input
-            placeholder='Enter color hex'
-            type='text'
-            className='w-11/12 input'
-          />
-        </div>
-        <div className='bottom-container'>
-          <div className='w-full h-5/6 '>
-            <ul className='list-container'>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-              <li className='p-2 m-1 list-item'>#FFFFFF</li>
-            </ul>
+            <button
+              onClick={() => getColor()}
+              className='w-9/12 px-4 my-1 btn lg:w-1/2'
+              style={{
+                color: color.hex,
+              }}
+            >
+              Generate Color
+            </button>
+            <p className='text-lg font-semibold text-red-700'>{errorMsg}</p>
+            <input
+              placeholder='Enter color hex'
+              type='text'
+              className='w-11/12 input'
+            />
+          </div>
+          <div className='bottom-container'>
+            <div className='w-full h-5/6 '>
+              <DndProvider
+                backend={isMobile ? TouchBackend : HTML5Backend}
+                options={
+                  isMobile
+                    ? {
+                        delayTouchStart: 100,
+                      }
+                    : {}
+                }
+              >
+                <ColorsListContainer />
+              </DndProvider>
+            </div>
           </div>
         </div>
       </div>

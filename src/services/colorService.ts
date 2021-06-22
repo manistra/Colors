@@ -11,7 +11,7 @@ const api = axios.create({
 
 const useColorService = (): [() => void, Color, string] =>
 {
-    const [currentColor, setCurrentColor] = useState<Color>({ hex: "", id: -2 });
+    const [currentColor, setCurrentColor] = useState<Color>({ hex: "#FFFFFF", id: -2 });
     const [errorMsg, setErrorMsg] = useState("");
 
     const getColor = async () =>

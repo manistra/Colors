@@ -10,14 +10,13 @@
   }
 
   .text-title {
-    @apply text-5xl italic tracking-widest uppercase lg:text-9xl md:text-8xl sm:text-6xl;
+    @apply text-6xl italic tracking-widest uppercase sm:text-7xl lg:text-9xl md:text-8xl;
   }
-
   .btn {
-    @apply p-5 my-1 text-xl font-bold tracking-wide uppercase transition ease-in-out transform bg-white border-2 border-gray-900 rounded shadow-md hover:scale-105 active:bg-gray-50 active:scale-100 lg:text-6xl;
+    @apply px-2 py-5 my-1 text-3xl tracking-wide transition ease-in-out transform bg-white border-2 border-gray-900 rounded shadow-md sm:text-4xl focus:outline-none lg:px-5 hover:scale-105 active:bg-gray-50 active:scale-100 lg:text-6xl;
   }
   .input {
-    @apply h-10 p-2 text-base font-semibold uppercase border-2 border-gray-900 rounded shadow-md lg:text-xl lg:h-12;
+    @apply w-full h-12 p-2 pl-8 text-xl font-semibold uppercase border-2 border-gray-900 rounded pr-28 lg:text-2xl lg:h-14;
   }
   .top-container {
     @apply flex flex-col items-center justify-between h-1/2;
@@ -47,6 +46,12 @@ h1 {
   color: white;
   -webkit-text-stroke: 1px black;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Disabling tap highlight for buttons */
+button,
+div {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 ::-webkit-scrollbar {

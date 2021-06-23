@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       backgroundColor: ['active'],
       scale: ['active'],
+      animation: ['hover'],
     },
   },
   plugins: [],

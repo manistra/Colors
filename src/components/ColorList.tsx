@@ -1,6 +1,7 @@
 import { ColorItem } from './ColorItem';
 import { Color } from '../types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { Transition } from '@headlessui/react';
 
 interface ColorListProps {
   changeCurrentColor: (newColor: Color) => void;
@@ -47,16 +48,24 @@ export const ColorList = ({
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId={'id'}>
         {(provided) => (
-          <div
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            className='color-list-container'
+          <Transition
+            className='w-full h-5/6'
+            show={!!colors.length}
+            enter='transform transition duration-1000'
+            enterFrom='opacity-75 translate-y-20 scale-50'
+            enterTo='opacity-100 translate-y-0 scale-100'
           >
-            {colors.map((color, i) =>
-              renderCard(color, i, color.hex === currentColor.hex)
-            )}
-            {provided.placeholder}
-          </div>
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className='color-list-container'
+            >
+              {colors.map((color, i) =>
+                renderCard(color, i, color.hex === currentColor.hex)
+              )}
+              {provided.placeholder}
+            </div>
+          </Transition>
         )}
       </Droppable>
     </DragDropContext>

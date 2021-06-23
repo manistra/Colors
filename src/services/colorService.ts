@@ -12,7 +12,7 @@ const api = axios.create({
 const useColorService = (): [() => void, (newColor: Color) => void, (newColorHistory: Color[]) => void, Color, string, Color[],] =>
 {
     const [currentColor, setCurrentColor] = useState<Color>({ hex: "", id: -2 });
-    const [colorHistory, setColorHistory] = useState<Color[]>([]);
+    const [colorList, setColorList] = useState<Color[]>([]);
     const [errorMsg, setErrorMsg] = useState("");
 
     const getColor = async () =>
@@ -27,7 +27,7 @@ const useColorService = (): [() => void, (newColor: Color) => void, (newColorHis
                 return;
             }
             removeColorIfExists('#' + response.data.colors[0].hex);
-            setColorHistory(colorHistory => [{ hex: '#' + response.data.colors[0].hex, id: response.data.colors[0].id }, ...colorHistory]);
+            setColorList(colorList => [{ hex: '#' + response.data.colors[0].hex, id: response.data.colors[0].id }, ...colorList]);
             setCurrentColor({ hex: '#' + response.data.colors[0].hex, id: response.data.colors[0].id });
 
         } catch (error)
@@ -37,29 +37,29 @@ const useColorService = (): [() => void, (newColor: Color) => void, (newColorHis
     };
     const removeColorIfExists = (hex: string) =>
     {
-        const newColor = colorHistory.find(el => el.hex === hex)
+        const newColor = colorList.find(el => el.hex === hex)
 
         if (newColor)
         {
-            let newColorHistory = colorHistory.filter(color => color.hex !== hex); //is this a ref or a copy of colorHistory? BUMP
-            setColorHistory([...newColorHistory])
+            let newColorHistory = colorList.filter(color => color.hex !== hex); //is this a ref or a copy of colorList? BUMP
+            setColorList([...newColorHistory])
         }
     }
     const changeCurrentColor = (newColor: Color) =>
     {
-        if (!colorHistory.find(el => el.hex === newColor.hex))
-            setColorHistory(colorHistory => [newColor, ...colorHistory]);
+        if (!colorList.find(el => el.hex === newColor.hex))
+            setColorList(colorList => [newColor, ...colorList]);
         setCurrentColor(newColor)
 
     }
-    const changeColorHistory = (newColorHistory: Color[]) =>
+    const changeColorList = (newColorHistory: Color[]) =>
     {
-        setColorHistory([...newColorHistory]);
+        setColorList([...newColorHistory]);
 
     }
 
 
-    return [getColor, changeCurrentColor, changeColorHistory, currentColor, errorMsg, colorHistory,];
+    return [getColor, changeCurrentColor, changeColorList, currentColor, errorMsg, colorList,];
 };
 
 export default useColorService;

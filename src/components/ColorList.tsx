@@ -5,15 +5,15 @@ import { Transition } from '@headlessui/react';
 
 interface ColorListProps {
   changeCurrentColor: (newColor: Color) => void;
-  changeColorHistory: (newColorHistory: Color[]) => void;
-  colors: Color[];
+  changeColorList: (newColorHistory: Color[]) => void;
+  colorList: Color[];
   currentColor: Color;
 }
 
 export const ColorList = ({
   changeCurrentColor,
-  changeColorHistory,
-  colors,
+  changeColorList,
+  colorList,
   currentColor,
 }: ColorListProps) => {
   const onDragEnd = (result: any) => {
@@ -26,10 +26,10 @@ export const ColorList = ({
     )
       return;
 
-    const newColorList = [...colors];
+    const newColorList = [...colorList];
     newColorList.splice(source.index, 1);
-    newColorList.splice(destination.index, 0, colors[source.index]);
-    changeColorHistory(newColorList);
+    newColorList.splice(destination.index, 0, colorList[source.index]);
+    changeColorList(newColorList);
   };
 
   const renderCard = (color: Color, index: number, selected: boolean) => {
@@ -50,7 +50,7 @@ export const ColorList = ({
         {(provided) => (
           <Transition
             className='w-full h-5/6'
-            show={!!colors.length}
+            show={!!colorList.length}
             enter='transform transition duration-1000'
             enterFrom='opacity-75 translate-y-20 scale-50'
             enterTo='opacity-100 translate-y-0 scale-100'
@@ -60,7 +60,7 @@ export const ColorList = ({
               ref={provided.innerRef}
               className='color-list-container'
             >
-              {colors.map((color, i) =>
+              {colorList.map((color, i) =>
                 renderCard(color, i, color.hex === currentColor.hex)
               )}
               {provided.placeholder}

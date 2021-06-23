@@ -6,13 +6,13 @@ import { Transition } from '@headlessui/react';
 interface InputProps {
   changeCurrentColor: (newColor: Color) => void;
   currentColor: Color;
-  colors: Color[];
+  colorList: Color[];
 }
 
 export const Input = ({
   changeCurrentColor,
   currentColor,
-  colors,
+  colorList,
 }: InputProps) => {
   const [hexInput, setHexInput] = useState<string>('');
   const [hexInputError, setHexInputError] = useState<string>('');

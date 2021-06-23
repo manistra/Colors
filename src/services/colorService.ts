@@ -51,7 +51,7 @@ const useColorService = (setButtonText: (hex: string) => void): [() => void, (ne
         if (!colorList.find(el => el.hex === newColor.hex))
             setColorList(colorList => [newColor, ...colorList]);
         setCurrentColor(newColor)
-
+        setButtonText(newColor.hex)
     }
     const changeColorList = (newColorHistory: Color[]) =>
     {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Color } from '../../types';
 
 interface TitleProps {
-  titleName: string;
+  titleText: string;
   currentColor: Color;
   colorList: Color[];
 }
@@ -11,12 +11,12 @@ interface TitleLetter {
   letter: string;
 }
 
-export const Title = ({ titleName, currentColor, colorList }: TitleProps) => {
+export const Title = ({ titleText, currentColor, colorList }: TitleProps) => {
   const [titleLetters, setTitleLetters] = useState<TitleLetter[]>([]);
 
   useEffect(() => {
     let titleArray: Array<TitleLetter> = [];
-    titleName.split('').forEach((letter) => {
+    titleText.split('').forEach((letter) => {
       titleArray.push({ hex: '#FFFFFF', letter: letter });
     });
     setTitleLetters([...titleArray]);

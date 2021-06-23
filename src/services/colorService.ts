@@ -9,7 +9,7 @@ const api = axios.create({
     }
 })
 
-const useColorService = (): [() => void, (newColor: Color) => void, (newColorHistory: Color[]) => void, Color, string, Color[],] =>
+const useColorService = (setButtonText: (hex: string) => void): [() => void, (newColor: Color) => void, (newColorHistory: Color[]) => void, Color, string, Color[],] =>
 {
     const [currentColor, setCurrentColor] = useState<Color>({ hex: "", id: -2 });
     const [colorList, setColorList] = useState<Color[]>([]);
@@ -29,6 +29,7 @@ const useColorService = (): [() => void, (newColor: Color) => void, (newColorHis
             removeColorIfExists('#' + response.data.colors[0].hex);
             setColorList(colorList => [{ hex: '#' + response.data.colors[0].hex, id: response.data.colors[0].id }, ...colorList]);
             setCurrentColor({ hex: '#' + response.data.colors[0].hex, id: response.data.colors[0].id });
+            setButtonText('#' + response.data.colors[0].hex)
 
         } catch (error)
         {

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Transition } from '@headlessui/react';
 
 interface TitleProps {
@@ -20,7 +19,7 @@ export const ErrorCard = ({ errorMsg }: TitleProps) => {
       leaveFrom='opacity-100 scale-100 translate-y-0 translate-x-0'
       leaveTo='opacity-0  scale-100 -translate-x-20'
     >
-      <div className='flex items-center justify-center px-5 text-xs text-gray-900 border-white left-2 lg:w-auto lg:left-2 top-2 lg:text-base py-7 error-card'>
+      <div className='flex items-center justify-center px-5 text-xs text-gray-900 left-2 lg:w-auto lg:left-2 top-2 lg:text-base py-7 error-card'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='mr-3 text-red-700 w-7 h-7'

@@ -16,7 +16,7 @@
     @apply px-2 py-5 my-1 text-3xl tracking-wide transition ease-in-out transform bg-white rounded sm:text-4xl focus:outline-none lg:px-5 hover:scale-105 active:bg-gray-50 active:scale-100 lg:text-6xl;
   }
   .input {
-    @apply w-full h-12 p-2 pl-8 text-xl font-normal text-gray-700 uppercase rounded shadow focus:outline-none pr-28 lg:text-2xl lg:h-14;
+    @apply w-full h-12 p-2 pl-8 text-xl font-normal tracking-wide uppercase rounded shadow focus:outline-none pr-28 lg:text-2xl lg:h-14;
   }
   .top-container {
     @apply flex flex-col items-center justify-between h-1/2;
@@ -31,7 +31,7 @@
     @apply flex items-center flex-1 p-2 bg-blue-300 rounded-md cursor-pointer select-none;
   }
   .error-card {
-    @apply absolute z-20 flex text-red-700 bg-white border-red-700 rounded shadow border-1 bg-opacity-70 backdrop-filter backdrop-blur-sm;
+    @apply absolute z-20 flex text-red-800 bg-white rounded shadow bg-opacity-80 backdrop-filter backdrop-blur-sm;
   }
 }
 

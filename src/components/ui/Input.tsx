@@ -5,10 +5,15 @@ import { Transition } from '@headlessui/react';
 
 interface InputProps {
   changeCurrentColor: (newColor: Color) => void;
+  setButtonText: (hex: string) => void;
   currentColor: Color;
 }
 
-export const Input = ({ changeCurrentColor, currentColor }: InputProps) => {
+export const Input = ({
+  changeCurrentColor,
+  setButtonText,
+  currentColor,
+}: InputProps) => {
   const [hexInput, setHexInput] = useState<string>('');
   const [hexInputError, setHexInputError] = useState<string>('');
   const [hexInputHasError, setHexInputHasError] = useState<boolean>(false);
@@ -25,6 +30,16 @@ export const Input = ({ changeCurrentColor, currentColor }: InputProps) => {
       setHexInputError('Please enter a valid color hex');
     }
   };
+  const onInputChange = (event: any) => {
+    if (event.target.value.length > 7)
+      event.target.value = event.target.value.slice(0, 7);
+
+    setHexInput(event.target.value);
+    if (event.target.value !== '') setButtonText(event.target.value);
+    else setButtonText(currentColor.hex);
+    setHexInputHasError(false);
+  };
+
   return (
     <div className='relative w-full lg:w-10/12'>
       <Transition
@@ -65,7 +80,7 @@ export const Input = ({ changeCurrentColor, currentColor }: InputProps) => {
           <div
             className={`absolute right-0 z-10 flex items-center justify-center w-2/12 h-full border-gray-900 rounded-r md:w-1/12 lg:w-1/12 ${
               hexInputHasError
-                ? 'border-1 border-red-700'
+                ? ''
                 : 'transition transform cursor-pointer active:scale-95  hover:scale-105'
             }`}
             style={{ backgroundColor: invertHex(currentColor.hex) }}
@@ -91,13 +106,10 @@ export const Input = ({ changeCurrentColor, currentColor }: InputProps) => {
           </div>
           <span className='absolute inset-y-0 left-0 flex items-center pl-2'>
             <svg
-              style={{
-                color: hexInputHasError
-                  ? '#B91C1C'
-                  : invertHex(currentColor.hex),
-              }}
               xmlns='http://www.w3.org/2000/svg'
-              className={` w-6 h-6 ${hexInputHasError ? 'text-red-700' : ''}`}
+              className={` w-6 h-6 ${
+                hexInputHasError ? 'text-red-800' : 'text-gray-700'
+              }`}
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
@@ -112,14 +124,13 @@ export const Input = ({ changeCurrentColor, currentColor }: InputProps) => {
           </span>
           <input
             onKeyDown={(e) => e.key === 'Enter' && submitHexInput()}
-            onChange={(event) => {
-              setHexInput(event.target.value);
-              setHexInputHasError(false);
+            onChange={(e) => {
+              onInputChange(e);
             }}
             placeholder='FFFFFF'
             type='text'
-            className={`input ${
-              hexInputHasError ? 'border-1 border-red-700' : ''
+            className={`input  ${
+              hexInputHasError ? 'text-red-800' : 'text-gray-700'
             }`}
           />
         </div>

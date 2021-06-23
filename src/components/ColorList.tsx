@@ -2,7 +2,6 @@ import { ColorItem } from './ColorItem';
 import { Color } from '../types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Transition } from '@headlessui/react';
-import { invertHex } from '../helpers/hexHelper';
 
 interface ColorListProps {
   changeCurrentColor: (newColor: Color) => void;

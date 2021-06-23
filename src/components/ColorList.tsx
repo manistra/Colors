@@ -2,6 +2,7 @@ import { ColorItem } from './ColorItem';
 import { Color } from '../types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Transition } from '@headlessui/react';
+import { invertHex } from '../helpers/hexHelper';
 
 interface ColorListProps {
   changeCurrentColor: (newColor: Color) => void;
@@ -56,9 +57,10 @@ export const ColorList = ({
             enterTo='opacity-100 translate-y-0 scale-100'
           >
             <div
+              style={{}}
               {...provided.droppableProps}
               ref={provided.innerRef}
-              className='color-list-container'
+              className='bg-opacity-75 bg-gray-50 color-list-container'
             >
               {colorList.map((color, i) =>
                 renderCard(color, i, color.hex === currentColor.hex)

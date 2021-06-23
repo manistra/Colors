@@ -11,7 +11,9 @@ export const Button = ({ onClick, currentColor }: ButtonProps) => {
     <button
       onClick={() => onClick()}
       className={`w-11/12 btn ${
-        currentColor.hex === '' ? 'font-thin' : 'uppercase font-bold'
+        currentColor.hex === ''
+          ? 'font-extralight border-2 border-gray-900'
+          : 'uppercase font-bold shadow'
       }`}
       style={{
         backgroundColor: invertHex(currentColor.hex),

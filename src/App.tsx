@@ -4,6 +4,7 @@ import { Button } from './components/ui/Button';
 import { ClipBoardIcon } from './components/ui/ClipBoardIcon';
 import { Input } from './components/ui/Input';
 import { Title } from './components/ui/Title';
+import { ErrorCard } from './components/ui/ErrorCard';
 
 function App() {
   const [
@@ -23,6 +24,7 @@ function App() {
           backgroundColor: currentColor.hex,
         }}
       >
+        <ErrorCard errorMsg={errorMsg} />
         <div className='main-container'>
           <div className='top-container'>
             <Title
@@ -36,12 +38,9 @@ function App() {
                 <ClipBoardIcon data={currentColor.hex} />
               </div>
             </div>
-            <p className='inline-block text-lg font-semibold text-red-700'>
-              {errorMsg}
-            </p>
+
             <Input
               currentColor={currentColor}
-              colorList={colorList}
               changeCurrentColor={changeCurrentColor}
             />
           </div>

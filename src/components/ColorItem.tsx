@@ -26,15 +26,17 @@ export const ColorItem = ({
           <div
             {...provided.draggableProps}
             {...provided.dragHandleProps}
-            className='m-1 bg-white rounded-md '
+            className='m-1 bg-white bg-opacity-50 rounded-md '
             onClick={() => {
               onClick();
             }}
             ref={provided.innerRef}
           >
             <div
-              className={`relative color-list-item font-semibold ${
-                selected ? 'font-bold border-2 text-lg' : 'text-md font-normal '
+              className={`relative color-list-item backdrop-filter backdrop-blur ${
+                selected
+                  ? 'font-bold border-2 text-lg'
+                  : 'text-md font-semibold '
               }`}
               style={{
                 borderColor: hex,
